@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jade Chen | Data Science</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Mobile Navigation -->
+  <header class="bg-stone-200 fixed top-0 w-full z-50 shadow">
+    <div class="max-w-4xl mx-auto p-4 flex justify-between items-center">
+      <div>
+        <h1 class="text-xl font-bold">Jade Chen</h1>
+        <p class="text-xs">Data Science & Economics</p>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-gray-700 focus:outline-none">
+          ☰
+        </button>
+      </div>
+      <nav id="nav-menu" class="hidden md:flex space-x-4">
+        <a href="#about" class="text-gray-700 font-semibold hover:underline">About</a>
+        <a href="#projects" class="text-gray-700 font-semibold hover:underline">Projects</a>
+        <a href="#contact" class="text-gray-700 font-semibold hover:underline">Contact</a>
+      </nav>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="#about" class="block text-gray-700 font-semibold hover:underline">About</a>
+      <a href="#projects" class="block text-gray-700 font-semibold hover:underline">Projects</a>
+      <a href="#contact" class="block text-gray-700 font-semibold hover:underline">Contact</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto pt-32 p-6 space-y-12">
+    <section id="about" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-2">About Me</h2>
+      <p class="mb-4">I’m a data analyst and economics researcher with a strong background in Python, R, and SQL. I’ve worked on projects ranging from tax fairness models to NLP and predictive modeling. I enjoy combining data science and policy insight to drive informed decision-making.</p>
+      <a href="resume.pdf" download class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Download Resume</a>
+    </section>
+
+    <section id="projects" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-4">Projects</h2>
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold">Housing Inequity & Predictive Modeling</h3>
+          <p>Built models to analyze property sale data in Cook County, revealing regressive valuation patterns. Focused on fairness in ML models and visualization.</p>
+          <a href="#" class="text-blue-600 hover:underline">View Project</a>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold">HandScript Web App</h3>
+          <p>Designed a tool to convert typed notes into personalized handwriting using a custom drawing canvas and Apple Pencil support.</p>
+          <a href="#" class="text-blue-600 hover:underline">View Project</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-4">Contact</h2>
+      <div class="space-y-2">
+        <a href="mailto:your.email@example.com" class="text-blue-600 hover:underline">Email</a>
+        <a href="https://www.linkedin.com/in/your-profile" class="text-blue-600 hover:underline">LinkedIn</a>
+        <a href="https://github.com/yourusername" class="text-blue-600 hover:underline">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-200 text-center p-4 mt-12">
+    <p>&copy; 2025 Jade Chen</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    // Mobile nav toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
