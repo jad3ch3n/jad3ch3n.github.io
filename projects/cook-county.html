@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
   <div class="flex justify-between items-center">
-    <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+    <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
   </div>
 
   <h1 class="text-3xl font-bold mt-4">Cook County Property Valuation & Bias Detection</h1>
@@ -22,18 +22,18 @@
   <h2 class="text-xl font-semibold mt-6">2. Data Exploration</h2>
   <p>I began by exploring sale patterns and housing characteristics, identifying building square footage and number of bedrooms as strong predictors of sale price. Visualizations such as the jointplot and boxplot below helped support these relationships:</p>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-    <img src="cook-county-figure1.png" alt="Jointplot of Log Building SF vs. Sale Price" class="rounded shadow">
-    <img src="cook-county-figure2.png" alt="Boxplot of Sale Price by Bedrooms" class="rounded shadow">
+    <img src="../assets/images/cook-county-figure1.png" alt="Jointplot of Log Building SF vs. Sale Price" class="rounded shadow">
+    <img src="../assets/images/cook-county-figure2.png" alt="Boxplot of Sale Price by Bedrooms" class="rounded shadow">
   </div>
 
   <h2 class="text-xl font-semibold mt-6">3. Modeling and Fairness Analysis</h2>
   <p>Though predictive models achieved strong accuracy (low RMSE), I found that residuals were not evenly distributed. Lower-priced homes were systematically overestimated, which leads to disproportionate tax burdens for low-income residents. These findings align with long-standing critiques of Cook County’s assessment system.</p>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-  <img src="cook-county-figure4.png" alt="RMSE by Price Interval" class="rounded shadow">
-  <img src="cook-county-figure5.png" alt="Overestimation Rates by Price" class="rounded shadow">
+  <img src="../assets/images/cook-county-figure4.png" alt="RMSE by Price Interval" class="rounded shadow">
+  <img src="../assets/images/cook-county-figure5.png" alt="Overestimation Rates by Price" class="rounded shadow">
 </div>
 <div class="my-4">
-  <img src="cook-county-figure3.png" alt="Residuals vs. Log Sale Price" class="rounded shadow">
+  <img src="../assets/images/cook-county-figure3.png" alt="Residuals vs. Log Sale Price" class="rounded shadow">
 </div>
 
   <h2 class="text-xl font-semibold mt-6">4. Equity and Context</h2>
