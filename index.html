@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jade Chen | Data Science</title>
+  <script>
+  tailwind.config = {
+    darkMode: 'class'
+  };
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -32,7 +37,7 @@
   .nav-link:nth-child(4) { animation-delay: 0.8s; }
 </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-white font-sans">
   <!-- Dark Mode Toggle -->
   <div class="fixed top-4 right-4 z-50">
     <button id="dark-toggle" class="bg-stone-200 text-sm px-3 py-1 rounded shadow">Toggle Dark Mode</button>
@@ -74,15 +79,15 @@
       <h2 class="text-2xl font-bold mb-4">Projects</h2>
       <div class="space-y-8">
         <div>
-          <h3 class="text-xl font-semibold">Cook County Property Valuation</h3>
+          <h3 class="text-xl font-semibold"><a href="cook-county.html" class="text-blue-600 hover:underline">Cook County Property Valuation</a></h3>
           <p>Built regression models using Python to predict property values and detect tax bias patterns. Identified consistent overestimation in low-value homes, highlighting regressive valuation trends. Tools: pandas, scikit-learn.</p>
         </div>
         <div>
-          <h3 class="text-xl font-semibold">Smart Cities Policy Evaluation</h3>
+          <h3 class="text-xl font-semibold"><a href="smart-cities.html" class="text-blue-600 hover:underline">Smart Cities Policy Evaluation</a></h3>
           <p>Analyzed India's Smart Cities Mission using difference-in-difference methods to assess COVID-19 impacts across 200 cities. Combined statistical rigor with cost-benefit analysis and policy insights.</p>
         </div>
         <div>
-          <h3 class="text-xl font-semibold">Subnational Conflict NLP Study</h3>
+          <h3 class="text-xl font-semibold"><a href="conflict-nlp.html" class="text-blue-600 hover:underline">Subnational Conflict NLP Study</a></h3>
           <p>Used Python (NLTK) to classify 195k+ conflict records by sentiment and framing. Labeled data for supervised ML to study how political reservations affect conflict narratives in India.</p>
         </div>
       </div>
@@ -117,19 +122,31 @@
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
 
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
 
-    const darkToggle = document.getElementById('dark-toggle');
-    darkToggle.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-    });
-  </script>
+  const html = document.documentElement;
+  const toggle = document.getElementById('dark-toggle');
+
+  // Only apply theme if the user has explicitly set one
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'dark') {
+    html.classList.add('dark');
+  } else if (storedTheme === 'light') {
+    html.classList.remove('dark');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isDark = html.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>
 </body>
 </html>
