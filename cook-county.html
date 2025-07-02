@@ -7,8 +7,43 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
-  <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+  <div class="flex justify-between items-center">
+    <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+  </div>
+
   <h1 class="text-3xl font-bold mt-4">Cook County Property Valuation & Bias Detection</h1>
-  <p class="mt-4">This project investigates housing sales data from Cook County to uncover regressive valuation patterns in property tax assessments...</p>
+  <div class="mt-2">
+    <a href="cook-county-viewer.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Full Paper</a>
+  </div>
+
+  <h2 class="text-xl font-semibold mt-6">1. Abstract</h2>
+  <p>This project investigates housing sale data from Cook County with a dual focus: building predictive models for property valuation and examining the fairness of those models in real-world contexts. Using exploratory analysis and visual diagnostics, I identified both the key features that drive sale prices and the systemic patterns that lead to inequitable outcomes in tax assessments.</p>
+
+  <h2 class="text-xl font-semibold mt-6">2. Data Exploration</h2>
+  <p>I began by exploring sale patterns and housing characteristics, identifying building square footage and number of bedrooms as strong predictors of sale price. Visualizations such as the jointplot and boxplot below helped support these relationships:</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+    <img src="cook-county-figure1.png" alt="Jointplot of Log Building SF vs. Sale Price" class="rounded shadow">
+    <img src="cook-county-figure2.png" alt="Boxplot of Sale Price by Bedrooms" class="rounded shadow">
+  </div>
+
+  <h2 class="text-xl font-semibold mt-6">3. Modeling and Fairness Analysis</h2>
+  <p>Though predictive models achieved strong accuracy (low RMSE), I found that residuals were not evenly distributed. Lower-priced homes were systematically overestimated, which leads to disproportionate tax burdens for low-income residents. These findings align with long-standing critiques of Cook County’s assessment system.</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+  <img src="cook-county-figure4.png" alt="RMSE by Price Interval" class="rounded shadow">
+  <img src="cook-county-figure5.png" alt="Overestimation Rates by Price" class="rounded shadow">
+</div>
+<div class="my-4">
+  <img src="cook-county-figure3.png" alt="Residuals vs. Log Sale Price" class="rounded shadow">
+</div>
+
+  <h2 class="text-xl font-semibold mt-6">4. Equity and Context</h2>
+  <p>Even accurate models can reinforce systemic inequity if their errors fall disproportionately on disadvantaged groups. Drawing from local journalism and policy investigations, I discuss how tax appeal processes, neighborhood demographics, and historical segregation intersect with model performance to compound unfair outcomes.</p>
+
+  <h2 class="text-xl font-semibold mt-6">5. Conclusion</h2>
+  <p>Predictive models must go beyond technical accuracy to incorporate fairness, transparency, and local context. Without thoughtful oversight, even the most statistically sound models risk amplifying racial and economic disparities. This project illustrates how data science can be used not only to predict—but also to question and improve—the systems we measure.</p>
+
+  <footer class="text-center text-sm text-gray-500 mt-12">
+    <p>&copy; 2025 Jade Chen</p>
+  </footer>
 </body>
 </html>
