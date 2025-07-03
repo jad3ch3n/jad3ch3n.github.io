@@ -1,14 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Conflict NLP Analysis | Jade Chen</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
   <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
-  <h1 class="text-3xl font-bold mt-4">Subnational Conflict: NLP Analysis of Political Reservations</h1>
-  <p class="mt-4">In this project, I analyzed over 195,000 conflict event records from ACLED and SATP using natural language processing...</p>
+  <div class="mt-2">
+    <a href="conflict-nlp-viewer.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Full Work</a>
+  </div>
+
+  <p class="mt-4">
+    This project investigates how mandated political representation (reservations) in India influences low-level subnational conflict. Using over 195,000 text-based conflict event records from ACLED and SATP, I applied natural language processing techniques to classify conflict type, analyze sentiment, and explore framing patterns.
+  </p>
+
+  <p class="mt-4">
+    I developed a formal model of targeted public goods provision that predicts reduced conflict when reservations benefit large, economically disadvantaged groups—especially when politicians face reelection incentives. These predictions are tested empirically using constituency-level conflict data and village-level survey results.
+  </p>
+
+  <p class="mt-4">
+    Empirical findings show that in constituencies where reservations do not rotate, conflict tends to decrease, supporting the idea that consistent minority representation can reduce political tensions. In contrast, at the village level where reservations rotate and reelection isn't possible, reservations are associated with unchanged or slightly elevated levels of conflict. These results suggest that the institutional design of reservation policies, particularly term limits and incentive structures, can critically shape their impact on political stability.
+  </p>
+
+  <!-- 🧠 Project Cards -->
+<div class="grid gap-4 sm:grid-cols-2 mt-8">
+  <!-- SATP Card -->
+  <div class="rounded-2xl shadow p-4 bg-white hover:shadow-lg transition">
+    <h3 class="text-xl font-semibold mb-1">🧠 NLP-Conflict Event Categorizer</h3>
+    <p class="text-sm text-gray-600 mb-2">
+      BERT + Regex classifier for political event types from the SATP dataset.
+    </p>
+    <div class="flex gap-2 flex-wrap text-xs text-white">
+      <span class="bg-blue-600 px-2 py-1 rounded-full">Python</span>
+      <span class="bg-purple-600 px-2 py-1 rounded-full">BERT</span>
+      <span class="bg-pink-500 px-2 py-1 rounded-full">spaCy</span>
+      <span class="bg-green-500 px-2 py-1 rounded-full">Regex</span>
+    </div>
+  </div>
+
+  <!-- ACLED Card -->
+  <div class="rounded-2xl shadow p-4 bg-white hover:shadow-lg transition">
+    <h3 class="text-xl font-semibold mb-1">📊 ACLED Preprocessing Script</h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Lemmatizes and tokenizes ACLED conflict notes with NLTK for downstream NLP tasks.
+    </p>
+    <div class="flex gap-2 flex-wrap text-xs text-white">
+      <span class="bg-blue-600 px-2 py-1 rounded-full">Python</span>
+      <span class="bg-yellow-500 px-2 py-1 rounded-full">NLTK</span>
+      <span class="bg-indigo-500 px-2 py-1 rounded-full">Regex</span>
+      <span class="bg-teal-600 px-2 py-1 rounded-full">Text Cleaning</span>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- Code Tabs -->
+  <div id="code-tabs" class="mt-10">
+    <h2 class="text-2xl font-bold mb-4">🧪 Code Examples</h2>
+    <div class="flex space-x-4 mb-4">
+      <button id="tab-satp" class="tab-button text-sm px-4 py-2 rounded bg-blue-600 text-white">SATP Categorizer</button>
+      <button id="tab-acled" class="tab-button text-sm px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">ACLED Preprocessing</button>
+    </div>
+
+    <div class="relative bg-white rounded-xl border p-4 shadow">
+      <!-- SATP -->
+      <div id="content-satp">
+        <h3 class="text-lg font-semibold mb-2">SATP Event Categorizer</h3>
+        <p class="text-sm text-gray-600 mb-4">
+          Uses BERT sentence embeddings and regex rules to classify SATP conflict descriptions into 19 political event categories.
+        </p>
+<details class="mb-4">
+  <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
+  <pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
+
+  <pre><code class="language-python">
+from sentence_transformers import SentenceTransformer, util
+import spacy
+import pandas as pd
+import re
+
+
+  </code></pre>
+</code></pre>
+</details>
+<pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
+
+class EventCategorizer:
+    def __init__(self):
+        self.model = SentenceTransformer("bert-base-nli-mean-tokens")
+        self.nlp = spacy.load("en_core_web_sm")
+
+        self.categories = {
+            1: "Police or security forces arrest rebels/terrorists",
+            2: "Police or security forces attack rebels/terrorists",
+            3: "Encounter between police/security forces and rebels/terrorists",
+            4: "Rebel/terrorist surrenders",
+            5: "Police or security forces raid and secure weapons/items",
+            6: "Rebels/terrorists attack civilians",
+            7: "Rebels/terrorists attack police/security",
+            8: "Rebels/terrorists attack infrastructure",
+            9: "Politician statement on conflict",
+            10: "Civilians protest peacefully",
+            11: "Civilians riot or act violently",
+            12: "Politicians reach out to rebels",
+            13: "Former rebel runs for office",
+            14: "Current rebel runs for office",
+            15: "Rebels/terrorists threaten politician",
+            16: "Police/security attack civilians",
+            17: "Government peace/development policy",
+            18: "Indian vs foreign forces clash",
+            19: "Rebel group infighting"
+        }
+
+        self.category_templates = {
+            1: ["Police arrested a rebel", "Security forces apprehended terrorists"],
+            2: ["Police attacked rebel hideout", "Security forces engaged with terrorists"],
+            3: ["Police clashed with rebels", "Security forces and militants exchanged fire"],
+            4: ["A rebel surrendered to authorities"],
+            5: ["Police raided a hideout and seized weapons"],
+            6: ["Terrorists opened fire on civilians"],
+            7: ["Rebels ambushed a police patrol"],
+            8: ["Rebels bombed a bridge"],
+            9: ["The Prime Minister commented on the conflict"],
+            10: ["Civilians held a peaceful protest"],
+            11: ["Civilians rioted in the streets"],
+            12: ["The government reached out to rebels"],
+            13: ["A former rebel contested elections"],
+            14: ["A rebel leader announced candidacy"],
+            15: ["A politician received threats from rebels"],
+            16: ["Security forces fired on protesters"],
+            17: ["The government announced a development program"],
+            18: ["Indian and Pakistani troops exchanged fire"],
+            19: ["Two rebel groups fought each other"]
+        }
+
+        self.event_patterns = {
+            r"police\\s+arrest.*(rebel|terrorist|maoist|cadre)": 1,
+            r"security\\s+forces?\\s+attack.*(rebel|terrorist|militant)": 2,
+            r"encounter.*(security|forces|rebel|terrorist|militant)": 3,
+            r"(rebel|terrorist|maoist)\\s+surrender": 4,
+            r"raid.*(weapons|arms|explosives)": 5,
+            r"(militant|terrorist|rebel).*attack.*(civilian|village)": 6,
+            r"(militant|terrorist|rebel).*attack.*(police|security)": 7,
+            r"(militant|terrorist|rebel).*attack.*(bridge|infrastructure)": 8,
+            r"(politician|minister).*(statement|comment).*conflict": 9,
+            r"peaceful\\s+protest": 10,
+            r"(riot|clash|violent)": 11,
+            r"(government|politician).*(reintegrate|amnesty|reach out)": 12,
+            r"former\\s+(rebel|terrorist).*(election|office)": 13,
+            r"current\\s+(rebel|terrorist).*(election|office)": 14,
+            r"(rebel|terrorist).*(threaten|warn).*politician": 15,
+            r"(police|security).*attack.*civilian": 16,
+            r"(policy|program).*peace|development|amnesty": 17,
+            r"clash.*(indian.*foreign|troops|forces)": 18,
+            r"(rebel|terrorist)\\s+group.*(fight|clash|rival)": 19
+        }
+
+    def calculate_similarity(self, sentence1, sentence2):
+        embeddings = self.model.encode([sentence1, sentence2])
+        score = util.pytorch_cos_sim(embeddings[0], embeddings[1])
+        return score.item()
+
+    def categorize_event(self, description):
+        best_score = 0
+        best_category = None
+
+        for category, templates in self.category_templates.items():
+            scores = [self.calculate_similarity(description, t) for t in templates]
+            max_score = max(scores)
+            if max_score > best_score:
+                best_score = max_score
+                best_category = category
+
+        for pattern, cat in self.event_patterns.items():
+            if re.search(pattern, description, re.IGNORECASE):
+                best_category = cat
+                break
+
+        return best_category or "Unknown"
+
+categorizer = EventCategorizer()
+df = pd.read_csv(r'C:\\Users\\Jade Chen\\Downloads\\dataset_satp_clean_for_similarity.csv')
+subset = df.head(30)
+subset["category"] = subset["descr_short"].apply(categorizer.categorize_event)
+
+print(subset[["descr_short", "category"]])
+
+counts = subset["category"].value_counts()
+ratios = {cat: count / len(subset) for cat, count in counts.items()}
+
+for cat, ratio in ratios.items():
+    print(f"Category {cat}: {ratio:.2f}")
+</code></pre>
+        <a href="https://gist.github.com/jad3ch3n/34f4bc4e1022a6af91fb4c1dbd2a8a49" target="_blank" class="mt-3 inline-block text-blue-600 hover:underline text-sm">Download on GitHub →</a>
+      </div>
+
+      <!-- ACLED -->
+      <div id="content-acled" class="hidden">
+        <h3 class="text-lg font-semibold mb-2">ACLED NLP Preprocessing</h3>
+        <p class="text-sm text-gray-600 mb-4">
+          Preprocesses ACLED notes using lowercase normalization, tokenization, lemmatization, and stopword/punctuation removal.
+        </p>
+<details class="mb-4">
+  <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
+  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
+  <pre><code class="language-python">
+import pandas as pd
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer, PorterStemmer
+from nltk.corpus import stopwords
+from nltk import RegexpParser
+from nltk.tree import Tree
+from nltk import pos_tag
+import re
+from contextlib import redirect_stdout
+import io
+import seaborn as sns
+import matplotlib.pyplot as plt
+from textblob import TextBlob
+import string
+from collections import Counter
+import statistics
+
+
+  </code></pre>
+</code></pre>
+</details>
+<pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+file_path = r'acled_india_csv.csv'
+acled_df = pd.read_csv(file_path, delimiter=';')
+print(acled_df.dtypes)
+
+def nlp_prep(data):
+    data = data.copy()
+    data['notes'] = data['notes'].str.lower()
+    data = data.drop_duplicates().reset_index(drop=True)
+
+    lem = WordNetLemmatizer()
+    stop = set(stopwords.words('english'))
+    cleaned_notes = []
+
+    for i in range(len(data)):
+        note = data['notes'].iloc[i]
+        note = re.sub(r'[^0-9A-Za-z]', ' ', note)
+        note = ''.join([char for char in note if char not in string.punctuation])
+        words = note.split()
+        tagged_words = pos_tag(words)
+        cleaned_words = [lem.lemmatize(word) for word, pos in tagged_words if word not in stop]
+        cleaned_note = ' '.join(cleaned_words)
+        cleaned_notes.append(cleaned_note)
+
+    data['cleaned_notes'] = cleaned_notes
+    return data
+</code></pre>
+        <a href="https://gist.github.com/jad3ch3n/9e18f54803597d9b0edda3f897a1f4d1" target="_blank" class="mt-3 inline-block text-blue-600 hover:underline text-sm">Download on GitHub →</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabSatp = document.getElementById('tab-satp');
+    const tabAcled = document.getElementById('tab-acled');
+    const contentSatp = document.getElementById('content-satp');
+    const contentAcled = document.getElementById('content-acled');
+
+    tabSatp.addEventListener('click', () => {
+      tabSatp.classList.add('bg-blue-600', 'text-white');
+      tabAcled.classList.remove('bg-blue-600', 'text-white');
+      tabAcled.classList.add('bg-gray-200');
+      contentSatp.classList.remove('hidden');
+      contentAcled.classList.add('hidden');
+    });
+
+    tabAcled.addEventListener('click', () => {
+      tabAcled.classList.add('bg-blue-600', 'text-white');
+      tabSatp.classList.remove('bg-blue-600', 'text-white');
+      tabSatp.classList.add('bg-gray-200');
+      contentAcled.classList.remove('hidden');
+      contentSatp.classList.add('hidden');
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 </body>
 </html>
