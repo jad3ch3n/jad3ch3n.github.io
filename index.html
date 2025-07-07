@@ -66,66 +66,64 @@
 
   <!-- Content -->
   <main class="pt-32 px-4">
-    <div class="max-w-4xl mx-auto space-y-12">
-      <section id="about" data-aos="fade-up">
-  <div class="flex justify-between items-center mb-2">
-    <h2 class="text-2xl font-bold">About Me</h2>
-    <a href="resume.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Resume</a>
+  <div class="max-w-4xl mx-auto space-y-12">
+    <section id="about" data-aos="fade-up">
+      <div class="flex items-center gap-4 mb-2">
+        <h2 class="text-2xl font-bold">About Me</h2>
+        <a href="resume.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Resume</a>
+      </div>
+      <div class="flex items-start gap-6 flex-col sm:flex-row">
+        <a href="assets/images/profile-pic.jpg" target="_blank" class="block w-32 h-32 shrink-0 transition-transform hover:scale-105">
+          <img src="assets/images/profile-pic.jpg" alt="Profile picture of Jade Chen" class="w-full h-full object-cover rounded-full shadow border border-gray-300" />
+        </a>
+        <div>
+          <p class="mb-4">
+            I’m Jade Chen, a data analyst and economics researcher based in Arlington, VA. With a B.A. in Economics from UC Berkeley and additional training at the London School of Economics, I specialize in using data science techniques to uncover insights in public policy, urban development, and social impact. I’m especially experienced in Python, R, SQL, and libraries like scikit-learn and NLTK. I’ve led research on housing inequality, smart cities policy, and conflict dynamics, blending statistical modeling with policy relevance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-4">Projects</h2>
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold"><a href="projects/cook-county.html" class="text-blue-600 hover:underline">Cook County Property Valuation</a></h3>
+          <p>Built regression models using Python to predict property values and detect tax bias patterns. Identified consistent overestimation in low-value homes, highlighting regressive valuation trends. Tools: pandas, scikit-learn.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold"><a href="projects/smart-cities.html" class="text-blue-600 hover:underline">Smart Cities Policy Evaluation</a></h3>
+          <p>Analyzed India's Smart Cities Mission using difference-in-difference methods to assess COVID-19 impacts across 200 cities. Combined statistical rigor with cost-benefit analysis and policy insights.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold"><a href="projects/conflict-nlp.html" class="text-blue-600 hover:underline">Subnational Conflict NLP Study</a></h3>
+          <p>Used Python (NLTK) to classify 195k+ conflict records by sentiment and framing. Labeled data for supervised ML to study how political reservations affect conflict narratives in India.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-4">Skills</h2>
+      <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <li>Python ▓▓▓▓▓▓▓▓░░ 90%</li>
+        <li>R ▓▓▓▓▓▓▓░░░ 80%</li>
+        <li>SQL ▓▓▓▓▓▓░░░░ 70%</li>
+        <li>Data Cleaning ▓▓▓▓▓▓▓▓▓░ 95%</li>
+        <li>EDA ▓▓▓▓▓▓▓▓░░ 90%</li>
+        <li>NLP ▓▓▓▓▓▓▓░░░ 80%</li>
+      </ul>
+    </section>
+
+    <section id="contact" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-4">Contact</h2>
+      <div class="space-y-2">
+        <a href="mailto:kunyuliu@berkeley.edu" class="text-blue-600 hover:underline">Email</a>
+        <a href="https://www.linkedin.com/in/jad3ch3n" class="text-blue-600 hover:underline">LinkedIn</a>
+        <a href="https://github.com/jad3ch3n" class="text-blue-600 hover:underline">GitHub</a>
+      </div>
+    </section>
   </div>
-  <div class="flex items-start gap-6 flex-col sm:flex-row">
-    <a href="assets/images/profile-pic.jpg" target="_blank" class="block w-32 h-32 shrink-0 transition-transform hover:scale-105">
-      <img src="assets/images/profile-pic.jpg" alt="Profile picture of Jade Chen" class="w-full h-full object-cover rounded-full shadow border border-gray-300" />
-    </a>
-    <div>
-      <p class="mb-4">
-        I’m Jade Chen, a data analyst and economics researcher based in Arlington, VA. With a B.A. in Economics from UC Berkeley and additional training at the London School of Economics, I specialize in using data science techniques to uncover insights in public policy, urban development, and social impact. I’m especially experienced in Python, R, SQL, and libraries like scikit-learn and NLTK. I’ve led research on housing inequality, smart cities policy, and conflict dynamics, blending statistical modeling with policy relevance.
-      </p>
-    </div>
-  </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" data-aos="fade-up">
-        <h2 class="text-2xl font-bold mb-4">Projects</h2>
-        <div class="space-y-8">
-          <div>
-            <h3 class="text-xl font-semibold"><a href="projects/cook-county.html" class="text-blue-600 hover:underline">Cook County Property Valuation</a></h3>
-            <p>Built regression models using Python to predict property values and detect tax bias patterns. Identified consistent overestimation in low-value homes, highlighting regressive valuation trends. Tools: pandas, scikit-learn.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold"><a href="projects/smart-cities.html" class="text-blue-600 hover:underline">Smart Cities Policy Evaluation</a></h3>
-            <p>Analyzed India's Smart Cities Mission using difference-in-difference methods to assess COVID-19 impacts across 200 cities. Combined statistical rigor with cost-benefit analysis and policy insights.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold"><a href="projects/conflict-nlp.html" class="text-blue-600 hover:underline">Subnational Conflict NLP Study</a></h3>
-            <p>Used Python (NLTK) to classify 195k+ conflict records by sentiment and framing. Labeled data for supervised ML to study how political reservations affect conflict narratives in India.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="skills" data-aos="fade-up">
-        <h2 class="text-2xl font-bold mb-4">Skills</h2>
-        <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <li>Python ▓▓▓▓▓▓▓▓░░ 90%</li>
-          <li>R ▓▓▓▓▓▓▓░░░ 80%</li>
-          <li>SQL ▓▓▓▓▓▓░░░░ 70%</li>
-          <li>Data Cleaning ▓▓▓▓▓▓▓▓▓░ 95%</li>
-          <li>EDA ▓▓▓▓▓▓▓▓░░ 90%</li>
-          <li>NLP ▓▓▓▓▓▓▓░░░ 80%</li>
-        </ul>
-      </section>
-
-      <section id="contact" data-aos="fade-up">
-        <h2 class="text-2xl font-bold mb-4">Contact</h2>
-        <div class="space-y-2">
-          <a href="mailto:kunyuliu@berkeley.edu" class="text-blue-600 hover:underline">Email</a>
-          <a href="https://www.linkedin.com/in/jad3ch3n" class="text-blue-600 hover:underline">LinkedIn</a>
-          <a href="https://github.com/jad3ch3n" class="text-blue-600 hover:underline">GitHub</a>
-        </div>
-      </section>
-    </div>
-  </main>
+</main>
 
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="fixed bottom-4 right-4 bg-gray-300 text-black px-3 py-2 rounded shadow hover:bg-gray-400">Top ↑</button>
 
