@@ -135,10 +135,11 @@
     </div>
   </main>
 
-    <!-- Modal for enlarged profile pic -->
-  <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
-    <div class="bg-white dark:bg-neutral-900 rounded-full p-2 shadow-lg">
-      <img src="assets/images/profile-pic.jpg" alt="Enlarged profile picture" class="w-64 h-64 object-cover rounded-full border-4 border-white dark:border-gray-700">
+  <!-- Modal for enlarged profile pic -->
+  <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 p-4">
+    <div class="relative fade-in-fast max-w-full w-[32rem] sm:w-[28rem] md:w-[32rem]">
+      <button id="modal-close" class="absolute top-0 right-0 m-2 text-white text-2xl bg-black bg-opacity-50 rounded-full w-8 h-8 flex items-center justify-center hover:bg-opacity-75">&times;</button>
+      <img src="assets/images/profile-pic.jpg" alt="Enlarged profile picture" class="w-full aspect-square object-cover rounded-full border-4 border-white dark:border-gray-700 shadow-xl">
     </div>
   </div>
 
@@ -218,14 +219,16 @@
 
     // Profile modal logic
     const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modal-close');
     const profilePic = document.querySelector('img[src="assets/images/profile-pic.jpg"]');
 
-    profilePic?.addEventListener('click', () => {
+    profilePic?.addEventListener('click', (e) => {
+      e.preventDefault();
       modal.classList.remove('hidden');
       modal.classList.add('flex');
     });
 
-    modal?.addEventListener('click', () => {
+    modalClose?.addEventListener('click', () => {
       modal.classList.add('hidden');
       modal.classList.remove('flex');
     });
