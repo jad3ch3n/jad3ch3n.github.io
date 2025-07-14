@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jade Chen | Data Science & Economics</title>
+  <title>Jade Chen | Portfolio</title>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -56,29 +56,39 @@
   <!-- Navigation -->
   <header class="bg-stone-200 fixed top-0 w-full z-40 shadow" id="header">
     <div class="max-w-4xl mx-auto p-4 flex justify-between items-center">
+      <!-- Site title -->
       <div>
         <h1 class="text-xl font-bold text-black animate-fade-in" id="site-title">Jade Chen</h1>
         <p class="text-xs text-black" id="site-subtitle">Data Science & Economics</p>
       </div>
-      <div class="md:hidden">
-        <button id="menu-btn" class="text-gray-700 focus:outline-none">☰</button>
-      </div>
-      <nav id="nav-menu" class="hidden md:flex items-center space-x-4">
-        <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl mr-2" aria-label="Toggle Dark Mode">
+
+      <!-- Right section: nav (desktop) + toggle + menu button -->
+      <div class="flex items-center space-x-2">
+        <!-- Lightbulb toggle (always visible) -->
+        <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">
           💡
         </button>
-        <a href="#about" class="nav-link font-semibold hover:underline" id="nav-about">About</a>
-        <a href="#projects" class="nav-link font-semibold hover:underline" id="nav-projects">Projects</a>
-        <a href="#skills" class="nav-link font-semibold hover:underline" id="nav-skills">Skills</a>
-        <a href="#contact" class="nav-link font-semibold hover:underline" id="nav-contact">Contact</a>
-      </nav>
+
+        <!-- Mobile hamburger -->
+        <button id="menu-btn" class="text-gray-700 md:hidden focus:outline-none text-2xl">☰</button>
+
+        <!-- Desktop nav -->
+        <nav id="nav-menu" class="hidden md:flex items-center space-x-4">
+          <a href="#about" class="nav-link font-semibold hover:underline" id="nav-about">About</a>
+          <a href="#projects" class="nav-link font-semibold hover:underline" id="nav-projects">Projects</a>
+          <a href="#skills" class="nav-link font-semibold hover:underline" id="nav-skills">Skills</a>
+          <a href="#contact" class="nav-link font-semibold hover:underline" id="nav-contact">Contact</a>
+        </nav>
+      </div>
     </div>
-    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
-      <a href="#about" class="block text-gray-700 font-semibold hover:underline">About</a>
-      <a href="#projects" class="block text-gray-700 font-semibold hover:underline">Projects</a>
-      <a href="#skills" class="block text-gray-700 font-semibold hover:underline">Skills</a>
-      <a href="#contact" class="block text-gray-700 font-semibold hover:underline">Contact</a>
-    </div>
+
+    <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+    <a href="#about" id="mobile-about" class="block text-gray-700 font-semibold hover:underline">About</a>
+    <a href="#projects" id="mobile-projects" class="block text-gray-700 font-semibold hover:underline">Projects</a>
+    <a href="#skills" id="mobile-skills" class="block text-gray-700 font-semibold hover:underline">Skills</a>
+    <a href="#contact" id="mobile-contact" class="block text-gray-700 font-semibold hover:underline">Contact</a>
+  </div>
   </header>
 
   <!-- Content -->
@@ -192,10 +202,20 @@
       title.classList.add('text-gray-300');
       subtitle.classList.remove('text-black');
       subtitle.classList.add('text-gray-300');
+
+      // Desktop nav links
       navLinks.forEach(link => {
         link.classList.remove('text-gray-700');
-        link.classList.add('text-white');
+        link.classList.add('text-gray-300');
       });
+
+      // Mobile nav links
+      ['mobile-about', 'mobile-projects', 'mobile-skills', 'mobile-contact'].forEach(id => {
+        const link = document.getElementById(id);
+        link?.classList.remove('text-gray-700');
+        link?.classList.add('text-gray-300');
+      });
+
       themeToggle.textContent = '💡';
     }
 
@@ -210,10 +230,20 @@
       title.classList.remove('text-gray-300');
       subtitle.classList.add('text-black');
       subtitle.classList.remove('text-gray-300');
+
+      // Desktop nav links
       navLinks.forEach(link => {
         link.classList.add('text-gray-700');
-        link.classList.remove('text-white');
+        link.classList.remove('text-gray-300');
       });
+
+      // Mobile nav links
+      ['mobile-about', 'mobile-projects', 'mobile-skills', 'mobile-contact'].forEach(id => {
+        const link = document.getElementById(id);
+        link?.classList.add('text-gray-700');
+        link?.classList.remove('text-gray-300');
+      });
+
       themeToggle.textContent = '💡';
     }
 
