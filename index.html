@@ -174,15 +174,15 @@
 
     function enableDarkMode() {
       body.classList.remove('bg-gray-50', 'text-gray-800');
-      body.classList.add('bg-neutral-900', 'text-gray-100');
+      body.classList.add('bg-neutral-900', 'text-gray-300');
       nav.classList.remove('bg-stone-200');
       nav.classList.add('bg-neutral-800');
       footer.classList.remove('bg-stone-200');
       footer.classList.add('bg-neutral-800');
       title.classList.remove('text-black');
-      title.classList.add('text-white');
+      title.classList.add('text-gray-300');
       subtitle.classList.remove('text-black');
-      subtitle.classList.add('text-white');
+      subtitle.classList.add('text-gray-300');
       navLinks.forEach(link => {
         link.classList.remove('text-gray-700');
         link.classList.add('text-white');
@@ -192,15 +192,15 @@
 
     function disableDarkMode() {
       body.classList.add('bg-gray-50', 'text-gray-800');
-      body.classList.remove('bg-neutral-900', 'text-gray-100');
+      body.classList.remove('bg-neutral-900', 'text-gray-300');
       nav.classList.add('bg-stone-200');
       nav.classList.remove('bg-neutral-800');
       footer.classList.add('bg-stone-200');
       footer.classList.remove('bg-neutral-800');
       title.classList.add('text-black');
-      title.classList.remove('text-white');
+      title.classList.remove('text-gray-300');
       subtitle.classList.add('text-black');
-      subtitle.classList.remove('text-white');
+      subtitle.classList.remove('text-gray-300');
       navLinks.forEach(link => {
         link.classList.add('text-gray-700');
         link.classList.remove('text-white');
