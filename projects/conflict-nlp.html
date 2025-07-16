@@ -6,6 +6,22 @@
   <title>Conflict NLP Analysis | Jade Chen</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <style>
+    pre, code {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+pre {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+pre code {
+  display: inline;
+}
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
   <div class="flex justify-between items-center">
@@ -91,13 +107,10 @@ from sentence_transformers import SentenceTransformer, util
 import spacy
 import pandas as pd
 import re
-
-
   </code></pre>
 </code></pre>
 </details>
 <pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
-
 class EventCategorizer:
     def __init__(self):
         self.model = SentenceTransformer("bert-base-nli-mean-tokens")
@@ -235,21 +248,10 @@ from textblob import TextBlob
 import string
 from collections import Counter
 import statistics
-
-
   </code></pre>
 </code></pre>
 </details>
 <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
-
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-
-file_path = r'acled_india_csv.csv'
-acled_df = pd.read_csv(file_path, delimiter=';')
-print(acled_df.dtypes)
-
 def nlp_prep(data):
     data = data.copy()
     data['notes'] = data['notes'].str.lower()
@@ -284,17 +286,19 @@ def nlp_prep(data):
     const contentAcled = document.getElementById('content-acled');
 
     tabSatp.addEventListener('click', () => {
-      tabSatp.classList.add('bg-blue-600', 'text-white');
-      tabAcled.classList.remove('bg-blue-600', 'text-white');
-      tabAcled.classList.add('bg-gray-200');
+      tabSatp.style.backgroundColor = 'blue';
+      tabSatp.style.color = 'white';
+      tabAcled.style.backgroundColor = 'lightgray';
+      tabAcled.style.color = 'black';
       contentSatp.classList.remove('hidden');
       contentAcled.classList.add('hidden');
     });
 
     tabAcled.addEventListener('click', () => {
-      tabAcled.classList.add('bg-blue-600', 'text-white');
-      tabSatp.classList.remove('bg-blue-600', 'text-white');
-      tabSatp.classList.add('bg-gray-200');
+      tabAcled.style.backgroundColor = 'blue';
+      tabAcled.style.color = 'white';
+      tabSatp.style.backgroundColor = 'lightgray';
+      tabSatp.style.color = 'black';
       contentAcled.classList.remove('hidden');
       contentSatp.classList.add('hidden');
     });
@@ -307,12 +311,24 @@ def nlp_prep(data):
       body.classList.remove('bg-gray-50', 'text-gray-800');
       body.classList.add('bg-neutral-900', 'text-gray-300');
 
+      const excludedElements = document.querySelectorAll('.project-card, .tab-button, .code-example');
+      excludedElements.forEach(element => {
+        element.style.color = '';
+        element.style.backgroundColor = '';
+      });
+
       localStorage.setItem('theme', 'dark');
     }
 
     function disableDarkMode() {
       body.classList.add('bg-gray-50', 'text-gray-800');
       body.classList.remove('bg-neutral-900', 'text-gray-300');
+
+      const excludedElements = document.querySelectorAll('.project-card, .tab-button, .code-example');
+      excludedElements.forEach(element => {
+        element.style.color = '';
+        element.style.backgroundColor = '';
+      });
 
       localStorage.setItem('theme', 'light');
     }
@@ -332,6 +348,35 @@ def nlp_prep(data):
         enableDarkMode();
       }
     });
+
+    const headers = document.querySelectorAll('h3.text-xl.font-semibold.mb-1');
+    headers.forEach(header => {
+      header.style.color = 'black';
+    });
+
+    const tabButtons = document.querySelectorAll('#tab-satp, #tab-acled');
+tabButtons.forEach(button => {
+  button.style.color = 'black';
+});
+
+const subHeaders = document.querySelectorAll('h3.text-lg.font-semibold.mb-2');
+subHeaders.forEach(subHeader => {
+  subHeader.style.color = 'black';
+});
+
+const regexElements = document.querySelectorAll('span');
+regexElements.forEach(element => {
+  if (element.textContent.trim() === 'Regex') {
+    element.style.backgroundColor = 'green';
+  }
+});
+
+const textCleaningElements = document.querySelectorAll('span');
+textCleaningElements.forEach(element => {
+  if (element.textContent.trim() === 'Text Cleaning') {
+    element.style.backgroundColor = 'red';
+  }
+});
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
