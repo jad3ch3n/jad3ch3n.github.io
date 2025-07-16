@@ -204,6 +204,7 @@
     ];
 
     function enableDarkMode() {
+      localStorage.setItem('theme', 'dark');
       body.classList.remove('bg-gray-50', 'text-gray-800');
       body.classList.add('bg-neutral-900', 'text-gray-300');
       nav.classList.remove('bg-stone-200');
@@ -232,6 +233,7 @@
     }
 
     function disableDarkMode() {
+      localStorage.setItem('theme', 'light');
       body.classList.add('bg-gray-50', 'text-gray-800');
       body.classList.remove('bg-neutral-900', 'text-gray-300');
       nav.classList.add('bg-stone-200');
@@ -257,6 +259,13 @@
       });
 
       themeToggle.textContent = '💡';
+    }
+
+    // Initialize theme on page load
+    if (localStorage.getItem('theme') === 'dark') {
+      enableDarkMode();
+    } else {
+      disableDarkMode();
     }
 
     themeToggle?.addEventListener('click', () => {
