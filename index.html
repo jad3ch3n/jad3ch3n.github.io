@@ -8,6 +8,14 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Apply saved theme from localStorage -->
+  <script>
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+
   <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -96,9 +104,10 @@
       <section id="about" data-aos="fade-up">
         <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
           <h2 class="text-2xl font-bold">About Me</h2>
-          <button id="view-resume-btn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover text-sm sm:text-base">
+          <a href="resume.html" target="_blank" rel="noopener noreferrer"
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover text-sm sm:text-base">
             View Resume
-          </button>
+          </a>
         </div>
 
         <div class="flex flex-col sm:flex-row sm:items-start sm:gap-6">
