@@ -8,7 +8,11 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
-  <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+  <div class="flex justify-between items-center">
+    <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+    <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">💡</button>
+  </div>
+
   <div class="mt-2">
 <a href="https://github.com/jonathanold/conflict-india" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">
   View Project on GitHub
@@ -295,11 +299,7 @@ def nlp_prep(data):
       contentSatp.classList.add('hidden');
     });
 
-    const themeToggle = document.createElement('button');
-    themeToggle.id = 'theme-toggle';
-    themeToggle.className = 'text-yellow-500 hover:text-yellow-300 text-xl';
-    themeToggle.setAttribute('aria-label', 'Toggle Dark Mode');
-    themeToggle.textContent = '💡';
+    const themeToggle = document.getElementById('theme-toggle');
 
     const body = document.body;
 
@@ -332,8 +332,6 @@ def nlp_prep(data):
         enableDarkMode();
       }
     });
-
-    document.querySelector('.flex').appendChild(themeToggle);
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
