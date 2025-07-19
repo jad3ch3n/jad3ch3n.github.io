@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume | Jade Chen</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Apply saved theme before page renders -->
+  <script>
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800 dark:bg-neutral-900 dark:text-gray-300 font-sans transition-colors duration-300">
   <div class="max-w-4xl mx-auto p-6">
     <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
     <h1 class="text-3xl font-bold mt-4 mb-4">Resume</h1>
-    <iframe src="resume.pdf" class="w-full h-[90vh] border rounded shadow" frameborder="0"></iframe>
+    <iframe
+      src="https://drive.google.com/file/d/1WkIzK8JPVE-G5QPPa5FTu4zw-Wgd7sft/preview"
+      class="w-full h-[90vh] border rounded shadow"
+      frameborder="0"
+      allow="autoplay">
+    </iframe>
   </div>
 </body>
 </html>

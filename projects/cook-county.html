@@ -45,5 +45,52 @@
   <footer class="text-center text-sm text-gray-500 mt-12">
     <p>&copy; 2025 Jade Chen</p>
   </footer>
+
+  <script>
+    const themeToggle = document.createElement('button');
+    themeToggle.id = 'theme-toggle';
+    themeToggle.className = 'text-yellow-500 hover:text-yellow-300 text-xl';
+    themeToggle.setAttribute('aria-label', 'Toggle Dark Mode');
+    themeToggle.textContent = '💡';
+
+    const body = document.body;
+    const footer = document.querySelector('footer');
+
+    function enableDarkMode() {
+      body.classList.remove('bg-gray-50', 'text-gray-800');
+      body.classList.add('bg-neutral-900', 'text-gray-300');
+      footer.classList.remove('bg-stone-200');
+      footer.classList.add('bg-neutral-800');
+
+      localStorage.setItem('theme', 'dark');
+    }
+
+    function disableDarkMode() {
+      body.classList.add('bg-gray-50', 'text-gray-800');
+      body.classList.remove('bg-neutral-900', 'text-gray-300');
+      footer.classList.add('bg-stone-200');
+      footer.classList.remove('bg-neutral-800');
+
+      localStorage.setItem('theme', 'light');
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      enableDarkMode();
+    } else {
+      disableDarkMode();
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = body.classList.contains('bg-neutral-900');
+      if (isDark) {
+        disableDarkMode();
+      } else {
+        enableDarkMode();
+      }
+    });
+
+    document.querySelector('.flex').appendChild(themeToggle);
+  </script>
 </body>
 </html>
