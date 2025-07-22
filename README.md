@@ -16,16 +16,16 @@ I'm Jade Chen — an Economics graduate with extensive coursework in Data Scienc
 
 ## 🚀 Projects Included
 
-- **[🚲 Bikeshare Usage Analysis – Washington D.C.](projects/bikeshare-analysis.html)**  
+- **[🚲 Bikeshare Usage Analysis – Washington D.C.](https://jad3ch3n.github.io/projects/dc-bikeshare/plots-and-paper/dc-bikeshare-paper.html)**
   Exploratory data analysis and visualization on usage trends. Found distinct patterns in casual vs. registered rider behavior.
 
-- **[🌏 Political Reservations & Conflict – India](projects/political-reservations.html)**  
-  Used NLP to classify 195k+ conflict records and explore how representation affects narrative framing.
+- **[🌏 Political Reservations on Subnational Conflict – India](https://jad3ch3n.github.io/projects/conflict-nlp.html)**  
+  Used NLP to classify 195k+ conflict records by sentiment and framing. Labeled data for supervised ML to study how political reservations affect conflict narratives in India.
 
-- **[🏘️ Property Valuation & Bias – Cook County](projects/cook-county-housing.html)**  
-  Built regression models to detect tax bias; identified consistent overvaluation of low-income properties.
+- **[🏘️ Property Valuation & Bias Detection – Cook County, Illinois](https://jad3ch3n.github.io/projects/cook-county.html)**  
+  Built regression models to detect tax bias. Identified consistent overestimation in low-value homes, highlighting regressive valuation trends.
 
-- **[🦠 Smart Cities & COVID Response – India](projects/smart-cities.html)**  
+- **[🦠 Smart Cities Pandemic Policy Evaluation – India](https://jad3ch3n.github.io/projects/smart-cities.html)**  
   Applied difference-in-differences to evaluate pandemic policy impacts across 200 cities.
 
 ## 🛠️ Tech Stack
