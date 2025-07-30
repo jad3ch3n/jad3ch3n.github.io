@@ -3,27 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Conflict NLP Analysis | Jade Chen</title>
+  <title>🌏 Political Reservations on Subnational Conflict – India | Jade Chen</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <style>
+    pre, code {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+pre {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+pre code {
+  display: inline;
+}
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
+<<<<<<< HEAD
   <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
-  <div class="mt-2">
-    <a href="conflict-nlp-viewer.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Full Work</a>
+  
+=======
+  <div class="flex justify-between items-center">
+    <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+    <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">💡</button>
   </div>
 
-  <p class="mt-4">
-    This project investigates how mandated political representation (reservations) in India influences low-level subnational conflict. Using over 195,000 text-based conflict event records from ACLED and SATP, I applied natural language processing techniques to classify conflict type, analyze sentiment, and explore framing patterns.
-  </p>
+  <h1 class="text-3xl font-bold mt-4">🌏 Political Reservations on Subnational Conflict – India</h1>
+
+  <div class="mt-2">
+<a href="https://github.com/jonathanold/conflict-india" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">
+  View Project on GitHub
+</a>
+  </div>
+>>>>>>> e633655e8567a323fd19bc5ee20e2d2d58bfff04
 
   <p class="mt-4">
-    I developed a formal model of targeted public goods provision that predicts reduced conflict when reservations benefit large, economically disadvantaged groups—especially when politicians face reelection incentives. These predictions are tested empirically using constituency-level conflict data and village-level survey results.
-  </p>
+  As part of my Undergraduate Research Apprenticeship at UC Berkeley, I contributed to a group research initiative led by Jonathan Old. Our team examined how mandated political representation (reservations) in India influences low-level subnational conflict.
+</p>
 
-  <p class="mt-4">
-    Empirical findings show that in constituencies where reservations do not rotate, conflict tends to decrease, supporting the idea that consistent minority representation can reduce political tensions. In contrast, at the village level where reservations rotate and reelection isn't possible, reservations are associated with unchanged or slightly elevated levels of conflict. These results suggest that the institutional design of reservation policies, particularly term limits and incentive structures, can critically shape their impact on political stability.
-  </p>
+<p class="mt-4">
+  Using over 195,000 text-based conflict event records from ACLED and SATP, I applied natural language processing techniques to classify conflict type, analyze sentiment, and identify patterns in political framing. This work involved developing a BERT-based classifier to categorize events and a preprocessing script to clean and tokenize conflict notes.
+</p>
+
+<p class="mt-4">
+  We developed a formal model of targeted public goods provision, which predicts reduced conflict when reservations benefit large, economically disadvantaged groups, particularly when politicians face reelection incentives. These predictions were tested using constituency-level conflict data and village-level survey results.
+</p>
+
+<p class="mt-4">
+  Empirical findings show that in constituencies where reservations do not rotate, conflict tends to decrease, supporting the idea that consistent minority representation can reduce political tensions. In contrast, conflict levels remain unchanged or slightly increase at the village level where reservations rotate and reelection is not possible. These results suggest that the design of reservation policies, especially term limits and incentive structures, plays a critical role in shaping their impact on political stability.
+</p>
 
   <!-- 🧠 Project Cards -->
 <div class="grid gap-4 sm:grid-cols-2 mt-8">
@@ -39,6 +72,7 @@
       <span class="bg-pink-500 px-2 py-1 rounded-full">spaCy</span>
       <span class="bg-green-500 px-2 py-1 rounded-full">Regex</span>
     </div>
+    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
   </div>
 
   <!-- ACLED Card -->
@@ -53,8 +87,10 @@
       <span class="bg-indigo-500 px-2 py-1 rounded-full">Regex</span>
       <span class="bg-teal-600 px-2 py-1 rounded-full">Text Cleaning</span>
     </div>
+    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
   </div>
 </div>
+    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
   </div>
 
   <!-- Code Tabs -->
@@ -72,8 +108,15 @@
         <p class="text-sm text-gray-600 mb-4">
           Uses BERT sentence embeddings and regex rules to classify SATP conflict descriptions into 19 political event categories.
         </p>
+        <p class="text-sm text-gray-600 mb-2"># This script was written for my NLP-Conflict project.</p>
 <details class="mb-4">
   <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
+<<<<<<< HEAD
+  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">$1</code></pre>
+</details>
+<pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
+
+=======
   <pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
 
   <pre><code class="language-python">
@@ -81,13 +124,11 @@ from sentence_transformers import SentenceTransformer, util
 import spacy
 import pandas as pd
 import re
-
-
   </code></pre>
 </code></pre>
 </details>
 <pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
-
+>>>>>>> e633655e8567a323fd19bc5ee20e2d2d58bfff04
 class EventCategorizer:
     def __init__(self):
         self.model = SentenceTransformer("bert-base-nli-mean-tokens")
@@ -204,8 +245,12 @@ for cat, ratio in ratios.items():
         <p class="text-sm text-gray-600 mb-4">
           Preprocesses ACLED notes using lowercase normalization, tokenization, lemmatization, and stopword/punctuation removal.
         </p>
+        <p class="text-sm text-gray-600 mb-2"># This script preprocesses ACLED conflict data for NLP analysis.</p>
 <details class="mb-4">
   <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
+<<<<<<< HEAD
+  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">$1</code></pre>
+=======
   <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
   <pre><code class="language-python">
 import pandas as pd
@@ -225,21 +270,11 @@ from textblob import TextBlob
 import string
 from collections import Counter
 import statistics
-
-
   </code></pre>
 </code></pre>
+>>>>>>> e633655e8567a323fd19bc5ee20e2d2d58bfff04
 </details>
 <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
-
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-
-file_path = r'acled_india_csv.csv'
-acled_df = pd.read_csv(file_path, delimiter=';')
-print(acled_df.dtypes)
-
 def nlp_prep(data):
     data = data.copy()
     data['notes'] = data['notes'].str.lower()
@@ -274,20 +309,97 @@ def nlp_prep(data):
     const contentAcled = document.getElementById('content-acled');
 
     tabSatp.addEventListener('click', () => {
-      tabSatp.classList.add('bg-blue-600', 'text-white');
-      tabAcled.classList.remove('bg-blue-600', 'text-white');
-      tabAcled.classList.add('bg-gray-200');
+      tabSatp.style.backgroundColor = 'blue';
+      tabSatp.style.color = 'white';
+      tabAcled.style.backgroundColor = 'lightgray';
+      tabAcled.style.color = 'black';
       contentSatp.classList.remove('hidden');
       contentAcled.classList.add('hidden');
     });
 
     tabAcled.addEventListener('click', () => {
-      tabAcled.classList.add('bg-blue-600', 'text-white');
-      tabSatp.classList.remove('bg-blue-600', 'text-white');
-      tabSatp.classList.add('bg-gray-200');
+      tabAcled.style.backgroundColor = 'blue';
+      tabAcled.style.color = 'white';
+      tabSatp.style.backgroundColor = 'lightgray';
+      tabSatp.style.color = 'black';
       contentAcled.classList.remove('hidden');
       contentSatp.classList.add('hidden');
     });
+
+    const themeToggle = document.getElementById('theme-toggle');
+
+    const body = document.body;
+
+    function enableDarkMode() {
+      body.classList.remove('bg-gray-50', 'text-gray-800');
+      body.classList.add('bg-neutral-900', 'text-gray-300');
+
+      const excludedElements = document.querySelectorAll('.project-card, .tab-button, .code-example');
+      excludedElements.forEach(element => {
+        element.style.color = '';
+        element.style.backgroundColor = '';
+      });
+
+      localStorage.setItem('theme', 'dark');
+    }
+
+    function disableDarkMode() {
+      body.classList.add('bg-gray-50', 'text-gray-800');
+      body.classList.remove('bg-neutral-900', 'text-gray-300');
+
+      const excludedElements = document.querySelectorAll('.project-card, .tab-button, .code-example');
+      excludedElements.forEach(element => {
+        element.style.color = '';
+        element.style.backgroundColor = '';
+      });
+
+      localStorage.setItem('theme', 'light');
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      enableDarkMode();
+    } else {
+      disableDarkMode();
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = body.classList.contains('bg-neutral-900');
+      if (isDark) {
+        disableDarkMode();
+      } else {
+        enableDarkMode();
+      }
+    });
+
+    const headers = document.querySelectorAll('h3.text-xl.font-semibold.mb-1');
+    headers.forEach(header => {
+      header.style.color = 'black';
+    });
+
+    const tabButtons = document.querySelectorAll('#tab-satp, #tab-acled');
+tabButtons.forEach(button => {
+  button.style.color = 'black';
+});
+
+const subHeaders = document.querySelectorAll('h3.text-lg.font-semibold.mb-2');
+subHeaders.forEach(subHeader => {
+  subHeader.style.color = 'black';
+});
+
+const regexElements = document.querySelectorAll('span');
+regexElements.forEach(element => {
+  if (element.textContent.trim() === 'Regex') {
+    element.style.backgroundColor = 'green';
+  }
+});
+
+const textCleaningElements = document.querySelectorAll('span');
+textCleaningElements.forEach(element => {
+  if (element.textContent.trim() === 'Text Cleaning') {
+    element.style.backgroundColor = 'red';
+  }
+});
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
