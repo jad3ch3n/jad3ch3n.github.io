@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Cities Policy Evaluation | Jade Chen</title>
+  <title>🦠 Smart Cities Pandemic Policy Evaluation – India | Jade Chen</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
+<body id="body" class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto transition-colors duration-300">
   <div class="flex justify-between items-center">
     <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+    <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">💡</button>
   </div>
 
-  <h1 class="text-3xl font-bold mt-4">Evaluating Smart Cities Mission and COVID-19 Response</h1>
+  <h1 class="text-3xl font-bold mt-4">🦠 Smart Cities Pandemic Policy Evaluation – India</h1>
   <div class="mt-2">
     <a href="smart-cities-viewer.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Full Paper</a>
   </div>
@@ -46,13 +47,13 @@
   <h2 class="text-xl font-semibold mt-6">6. Main Regression Equation</h2>
   <p>We elect a difference-in-differences model to compare COVID-19 outcomes between cities with and without the Smart Cities Mission.</p>
   <p>Our main regression equation reads:</p>
-  <code class="block p-2 bg-gray-100 rounded text-sm overflow-x-auto">
+  <code class="block p-2 rounded text-sm overflow-x-auto font-mono bg-white text-black dark:bg-neutral-800 dark:text-gray-200">
     Y<sub>i</sub> = β₀ + β₁SmartCity<sub>i</sub> + β₂Scores<sub>i</sub> + β₃AverageIncome<sub>i</sub> + β₄PopulationDensity<sub>i</sub> + β₅GovernmentFunding<sub>i</sub> + β₆EducationProportion<sub>i</sub> + β₇VaccineCoverage<sub>i</sub> + β₈AverageAge<sub>i</sub> + β₉GenderDistribution<sub>i</sub> + β₁₀LockdownPolicy<sub>i</sub> + β₁₁SocialDistancing<sub>i</sub> + β₁₂MaskMandates<sub>i</sub> + ε<sub>i</sub>
   </code>
   <p>Where σ<sub>c</sub> includes control variables and SmartCity<sub>i</sub> is a binary indicator.</p>
-  <br>
-  <p>For easier readability, the equation can be simplified to:</p>
-  <code class="block p-2 bg-gray-100 rounded text-sm overflow-x-auto">
+
+  <p class="mt-4">For easier readability, the equation can be simplified to:</p>
+  <code class="block p-2 rounded text-sm overflow-x-auto font-mono bg-white text-black dark:bg-neutral-800 dark:text-gray-200">
     Y<sub>i</sub> = β₀ + β₁SmartCity<sub>i</sub> + σ<sub>c</sub> + ε<sub>i</sub>
   </code>
   <p>Where σ<sub>c</sub> is a vector of control variables that includes:</p>
@@ -67,7 +68,6 @@
     <li>Gender distribution</li>
     <li>Binary variables for lockdown policies, social distancing, and mask mandates</li>
   </ul>
-  <p>σ<sub>c</sub> effectively acts as the city fixed-effects vector that controls for relevant demographic, economic, and policy-related factors.</p>
 
   <h2 class="text-xl font-semibold mt-6">7. Additional Analyses</h2>
   <ul class="list-disc ml-6">
@@ -79,8 +79,60 @@
   <h2 class="text-xl font-semibold mt-6">8. Policy Discussion</h2>
   <p>If the treatment effect is significant, it supports further investment in SCM and smart public health infrastructure. If not, refinement—not abandonment—of current interventions is needed.</p>
 
-  <footer class="text-center text-sm text-gray-500 mt-12">
+  <footer class="bg-stone-200 text-center p-4 mt-12">
     <p>&copy; 2025 Jade Chen</p>
   </footer>
+ 
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.getElementById('body');
+    const footer = document.querySelector('footer');
+
+    function enableDarkMode() {
+      body.classList.remove('bg-gray-50', 'text-gray-800');
+      body.classList.add('bg-neutral-900', 'text-gray-300');
+      footer.classList.remove('bg-stone-200');
+      footer.classList.add('bg-neutral-800');
+
+      // Update code blocks
+      document.querySelectorAll('code').forEach(codeBlock => {
+        codeBlock.style.backgroundColor = '#2d2d2d'; // Lighter gray background
+        codeBlock.style.color = '#e5e7eb'; // Light text
+      });
+
+      localStorage.setItem('theme', 'dark');
+    }
+
+    function disableDarkMode() {
+      body.classList.add('bg-gray-50', 'text-gray-800');
+      body.classList.remove('bg-neutral-900', 'text-gray-300');
+      footer.classList.add('bg-stone-200');
+      footer.classList.remove('bg-neutral-800');
+
+      // Update code blocks
+      document.querySelectorAll('code').forEach(codeBlock => {
+        codeBlock.style.backgroundColor = '#d6d3d1'; // bg-stone-200 color
+        codeBlock.style.color = '#000000'; // Dark text
+      });
+
+      localStorage.setItem('theme', 'light');
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      enableDarkMode();
+    } else {
+      disableDarkMode();
+    }
+
+    themeToggle?.addEventListener('click', () => {
+      const isDark = body.classList.contains('bg-neutral-900');
+      if (isDark) {
+        disableDarkMode();
+      } else {
+        enableDarkMode();
+      }
+    });
+  </script>
 </body>
 </html>
