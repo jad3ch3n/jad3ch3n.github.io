@@ -9,9 +9,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
   <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
-  <div class="mt-2">
-    <a href="conflict-nlp-viewer.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Full Work</a>
-  </div>
+  
 
   <p class="mt-4">
     This project investigates how mandated political representation (reservations) in India influences low-level subnational conflict. Using over 195,000 text-based conflict event records from ACLED and SATP, I applied natural language processing techniques to classify conflict type, analyze sentiment, and explore framing patterns.
@@ -39,6 +37,7 @@
       <span class="bg-pink-500 px-2 py-1 rounded-full">spaCy</span>
       <span class="bg-green-500 px-2 py-1 rounded-full">Regex</span>
     </div>
+    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
   </div>
 
   <!-- ACLED Card -->
@@ -53,8 +52,10 @@
       <span class="bg-indigo-500 px-2 py-1 rounded-full">Regex</span>
       <span class="bg-teal-600 px-2 py-1 rounded-full">Text Cleaning</span>
     </div>
+    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
   </div>
 </div>
+    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
   </div>
 
   <!-- Code Tabs -->
@@ -72,21 +73,12 @@
         <p class="text-sm text-gray-600 mb-4">
           Uses BERT sentence embeddings and regex rules to classify SATP conflict descriptions into 19 political event categories.
         </p>
+        <p class="text-sm text-gray-600 mb-2"># This script was written for my NLP-Conflict project.</p>
 <details class="mb-4">
   <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
-  <pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
-
-  <pre><code class="language-python">
-from sentence_transformers import SentenceTransformer, util
-import spacy
-import pandas as pd
-import re
-
-
-  </code></pre>
-</code></pre>
+  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">$1</code></pre>
 </details>
-<pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
+<pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
 
 class EventCategorizer:
     def __init__(self):
@@ -204,31 +196,10 @@ for cat, ratio in ratios.items():
         <p class="text-sm text-gray-600 mb-4">
           Preprocesses ACLED notes using lowercase normalization, tokenization, lemmatization, and stopword/punctuation removal.
         </p>
+        <p class="text-sm text-gray-600 mb-2"># This script preprocesses ACLED conflict data for NLP analysis.</p>
 <details class="mb-4">
   <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
-  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
-  <pre><code class="language-python">
-import pandas as pd
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer, PorterStemmer
-from nltk.corpus import stopwords
-from nltk import RegexpParser
-from nltk.tree import Tree
-from nltk import pos_tag
-import re
-from contextlib import redirect_stdout
-import io
-import seaborn as sns
-import matplotlib.pyplot as plt
-from textblob import TextBlob
-import string
-from collections import Counter
-import statistics
-
-
-  </code></pre>
-</code></pre>
+  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">$1</code></pre>
 </details>
 <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
 
