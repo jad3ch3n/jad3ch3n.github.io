@@ -24,10 +24,6 @@ pre code {
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
-<<<<<<< HEAD
-  <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
-  
-=======
   <div class="flex justify-between items-center">
     <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
     <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">💡</button>
@@ -40,7 +36,6 @@ pre code {
   View Project on GitHub
 </a>
   </div>
->>>>>>> e633655e8567a323fd19bc5ee20e2d2d58bfff04
 
   <p class="mt-4">
   As part of my Undergraduate Research Apprenticeship at UC Berkeley, I contributed to a group research initiative led by Jonathan Old. Our team examined how mandated political representation (reservations) in India influences low-level subnational conflict.
@@ -58,47 +53,62 @@ pre code {
   Empirical findings show that in constituencies where reservations do not rotate, conflict tends to decrease, supporting the idea that consistent minority representation can reduce political tensions. In contrast, conflict levels remain unchanged or slightly increase at the village level where reservations rotate and reelection is not possible. These results suggest that the design of reservation policies, especially term limits and incentive structures, plays a critical role in shaping their impact on political stability.
 </p>
 
-  <!-- 🧠 Project Cards -->
-<div class="grid gap-4 sm:grid-cols-2 mt-8">
-  <!-- SATP Card -->
-  <div class="rounded-2xl shadow p-4 bg-white hover:shadow-lg transition">
-    <h3 class="text-xl font-semibold mb-1">🧠 NLP-Conflict Event Categorizer</h3>
-    <p class="text-sm text-gray-600 mb-2">
-      BERT + Regex classifier for political event types from the SATP dataset.
-    </p>
-    <div class="flex gap-2 flex-wrap text-xs text-white">
-      <span class="bg-blue-600 px-2 py-1 rounded-full">Python</span>
-      <span class="bg-purple-600 px-2 py-1 rounded-full">BERT</span>
-      <span class="bg-pink-500 px-2 py-1 rounded-full">spaCy</span>
-      <span class="bg-green-500 px-2 py-1 rounded-full">Regex</span>
+  <!-- 🧠 Project Cards (now act as tab buttons) -->
+  <div class="grid gap-4 sm:grid-cols-2 mt-8">
+    <!-- SATP Card -->
+    <div
+      class="project-card rounded-2xl shadow p-4 bg-white hover:shadow-lg transition cursor-pointer"
+      data-tab="satp"
+    >
+      <h3 class="text-xl font-semibold mb-1">🧠 SATP Event Categorizer</h3>
+      <p class="text-sm text-gray-600 mb-2">
+        BERT + Regex classifier for political event types from the SATP dataset.
+      </p>
+      <div class="flex gap-2 flex-wrap text-xs text-white">
+        <span class="bg-blue-600 px-2 py-1 rounded-full">Python</span>
+        <span class="bg-purple-600 px-2 py-1 rounded-full">BERT</span>
+        <span class="bg-pink-500 px-2 py-1 rounded-full">spaCy</span>
+        <span class="bg-green-500 px-2 py-1 rounded-full">Regex</span>
+      </div>
     </div>
-    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
+
+    <!-- ACLED Card -->
+    <div
+      class="project-card rounded-2xl shadow p-4 bg-white hover:shadow-lg transition cursor-pointer"
+      data-tab="acled"
+    >
+      <h3 class="text-xl font-semibold mb-1">📊 ACLED Preprocessing Script</h3>
+      <p class="text-sm text-gray-600 mb-2">
+        Lemmatizes and tokenizes ACLED conflict notes with NLTK for downstream NLP tasks.
+      </p>
+      <div class="flex gap-2 flex-wrap text-xs text-white">
+        <span class="bg-blue-600 px-2 py-1 rounded-full">Python</span>
+        <span class="bg-yellow-500 px-2 py-1 rounded-full">NLTK</span>
+        <span class="bg-indigo-500 px-2 py-1 rounded-full">Regex</span>
+        <span class="bg-teal-600 px-2 py-1 rounded-full">Text Cleaning</span>
+      </div>
+    </div>
   </div>
 
-  <!-- ACLED Card -->
-  <div class="rounded-2xl shadow p-4 bg-white hover:shadow-lg transition">
-    <h3 class="text-xl font-semibold mb-1">📊 ACLED Preprocessing Script</h3>
-    <p class="text-sm text-gray-600 mb-2">
-      Lemmatizes and tokenizes ACLED conflict notes with NLTK for downstream NLP tasks.
-    </p>
-    <div class="flex gap-2 flex-wrap text-xs text-white">
-      <span class="bg-blue-600 px-2 py-1 rounded-full">Python</span>
-      <span class="bg-yellow-500 px-2 py-1 rounded-full">NLTK</span>
-      <span class="bg-indigo-500 px-2 py-1 rounded-full">Regex</span>
-      <span class="bg-teal-600 px-2 py-1 rounded-full">Text Cleaning</span>
-    </div>
-    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
-  </div>
-</div>
-    <a href="#code-tabs" class="block mt-4 text-blue-700 hover:underline text-sm">Read more →</a>
-  </div>
 
   <!-- Code Tabs -->
   <div id="code-tabs" class="mt-10">
     <h2 class="text-2xl font-bold mb-4">🧪 Code Examples</h2>
     <div class="flex space-x-4 mb-4">
-      <button id="tab-satp" class="tab-button text-sm px-4 py-2 rounded bg-blue-600 text-white">SATP Categorizer</button>
-      <button id="tab-acled" class="tab-button text-sm px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">ACLED Preprocessing</button>
+      <button
+        id="tab-satp"
+        class="tab-button text-sm px-4 py-2 rounded"
+        data-tab="satp"
+      >
+        SATP Categorizer
+      </button>
+      <button
+        id="tab-acled"
+        class="tab-button text-sm px-4 py-2 rounded"
+        data-tab="acled"
+      >
+        ACLED Preprocessing
+      </button>
     </div>
 
     <div class="relative bg-white rounded-xl border p-4 shadow">
@@ -108,15 +118,8 @@ pre code {
         <p class="text-sm text-gray-600 mb-4">
           Uses BERT sentence embeddings and regex rules to classify SATP conflict descriptions into 19 political event categories.
         </p>
-        <p class="text-sm text-gray-600 mb-2"># This script was written for my NLP-Conflict project.</p>
 <details class="mb-4">
   <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
-<<<<<<< HEAD
-  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">$1</code></pre>
-</details>
-<pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
-
-=======
   <pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
 
   <pre><code class="language-python">
@@ -128,7 +131,6 @@ import re
 </code></pre>
 </details>
 <pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
->>>>>>> e633655e8567a323fd19bc5ee20e2d2d58bfff04
 class EventCategorizer:
     def __init__(self):
         self.model = SentenceTransformer("bert-base-nli-mean-tokens")
@@ -245,12 +247,8 @@ for cat, ratio in ratios.items():
         <p class="text-sm text-gray-600 mb-4">
           Preprocesses ACLED notes using lowercase normalization, tokenization, lemmatization, and stopword/punctuation removal.
         </p>
-        <p class="text-sm text-gray-600 mb-2"># This script preprocesses ACLED conflict data for NLP analysis.</p>
 <details class="mb-4">
   <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
-<<<<<<< HEAD
-  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">$1</code></pre>
-=======
   <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
   <pre><code class="language-python">
 import pandas as pd
@@ -272,7 +270,6 @@ from collections import Counter
 import statistics
   </code></pre>
 </code></pre>
->>>>>>> e633655e8567a323fd19bc5ee20e2d2d58bfff04
 </details>
 <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
 def nlp_prep(data):
@@ -307,24 +304,6 @@ def nlp_prep(data):
     const tabAcled = document.getElementById('tab-acled');
     const contentSatp = document.getElementById('content-satp');
     const contentAcled = document.getElementById('content-acled');
-
-    tabSatp.addEventListener('click', () => {
-      tabSatp.style.backgroundColor = 'blue';
-      tabSatp.style.color = 'white';
-      tabAcled.style.backgroundColor = 'lightgray';
-      tabAcled.style.color = 'black';
-      contentSatp.classList.remove('hidden');
-      contentAcled.classList.add('hidden');
-    });
-
-    tabAcled.addEventListener('click', () => {
-      tabAcled.style.backgroundColor = 'blue';
-      tabAcled.style.color = 'white';
-      tabSatp.style.backgroundColor = 'lightgray';
-      tabSatp.style.color = 'black';
-      contentAcled.classList.remove('hidden');
-      contentSatp.classList.add('hidden');
-    });
 
     const themeToggle = document.getElementById('theme-toggle');
 
@@ -401,6 +380,45 @@ textCleaningElements.forEach(element => {
   }
 });
   </script>
+    <style>
+    /* hide all panes by default */
+    #content-satp, #content-acled { display: none; }
+    /* show only the active one */
+    #content-satp.active, #content-acled.active { display: block; }
+    /* focus ring on the selected card */
+    .project-card.selected { ring: 2px; ring-color: #3b82f6; }
+  </style>
+
+  <script>
+    const panes = ['satp','acled'];
+        document.querySelectorAll('.project-card, .tab-button')
+          .forEach(el => el.addEventListener('click', () => {
+            const which = el.dataset.tab;
+            if (!panes.includes(which)) return;
+            panes.forEach(id => {
+              document.getElementById('content-'+id)
+                .classList.toggle('active', id===which);
+            });
+            document.querySelectorAll('.project-card')
+              .forEach(c => c.classList.toggle('selected', c.dataset.tab===which));
+            document.querySelectorAll('.tab-button')
+              .forEach(b => {
+                const on = b.dataset.tab===which;
+                b.classList.toggle('bg-blue-600', on);
+                b.classList.toggle('text-white', on);
+                b.classList.toggle('bg-gray-200', !on);
+                b.classList.toggle('hover:bg-gray-300', !on);
+              });
+          }));
+        document.querySelector('[data-tab="satp"]').click();
+      </script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    </body>
+    </html>
+  </script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 </body>
