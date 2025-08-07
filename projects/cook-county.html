@@ -12,35 +12,92 @@
   </div>
 
   <h1 class="text-3xl font-bold mt-4">🏘️ Property Valuation & Bias Detection – Cook County, Illinois</h1>
-  <div class="mt-2">
-    <a href="cook-county-viewer.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Full Paper</a>
+  <div class="mt-2 flex gap-4">
+    <a href="https://nbviewer.org/github/jad3ch3n/cook-county-housing/blob/main/cook-county-analysis.ipynb" target="_blank" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">View Notebook</a>
+    <a href="https://github.com/jad3ch3n/cook-county-housing" target="_blank" rel="noopener" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Github Repo</a>
   </div>
 
-  <h2 class="text-xl font-semibold mt-6">1. Abstract</h2>
-  <p>This project investigates housing sale data from Cook County with a dual focus: building predictive models for property valuation and examining the fairness of those models in real-world contexts. Using exploratory analysis and visual diagnostics, I identified both the key features that drive sale prices and the systemic patterns that lead to inequitable outcomes in tax assessments.</p>
+  <h2 class="text-xl font-semibold mt-6">Abstract</h2>
+  <p>This study examines the determinants of 2013 to 2019 residential property sale prices in Cook County, Illinois using a three-stage linear modeling approach. Beginning with a simple univariate model based on bedroom count, I iteratively introduce building size and then a comprehensive set of engineered features (including log-transformed area measures, tax assessor estimates, fireplace counts, repair condition scores, central air conditioning status, and categorical encodings of room counts). My final model trained on 204,792 property transactions achieves a root-mean-square error (RMSE) of 0.3716 in predicting log sale price, representing a substantial 57% improvement over the baseline. I also find that lower-priced homes are systematically overestimated, illustrating a regressive bias that can exacerbate tax burdens on low-income residents. Drawing from local journalism and policy research, I discuss how tax appeal processes, neighborhood demographics, and historical segregation intersect with model performance to compound unfair outcomes.</p>
 
-  <h2 class="text-xl font-semibold mt-6">2. Data Exploration</h2>
-  <p>I began by exploring sale patterns and housing characteristics, identifying building square footage and number of bedrooms as strong predictors of sale price. Visualizations such as the jointplot and boxplot below helped support these relationships:</p>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-    <img src="../assets/images/cook-county-figure1.png" alt="Jointplot of Log Building SF vs. Sale Price" class="rounded shadow">
-    <img src="../assets/images/cook-county-figure2.png" alt="Boxplot of Sale Price by Bedrooms" class="rounded shadow">
+  <h2 class="text-xl font-semibold mt-6">1. Introduction</h2>
+  <p>Accurate prediction of residential sale prices is crucial for market transparency, equitable property taxation, and urban planning. While hedonic price models have long incorporated structural and locational attributes, advances in data pipelines and feature engineering now allow for larger-scale, reproducible analyses. This paper details a structured approach to modeling Cook County sale prices, emphasizing clarity, reproducibility, and interpretability. I additionally interrogate how residual errors map onto price strata, revealing a regressive pattern that aligns with critiques of Cook County’s assessment practices.</p>
+
+  <h2 class="text-xl font-semibold mt-6">2. Data Description</h2>
+  <p>The primary dataset (<code>cook_county_train.csv</code>) contains 204,792 records and 62 features, including physical attributes (e.g., building square footage, number of bedrooms), material characteristics (e.g., roof and wall types), condition assessments, and tax assessor estimates for land and building values. A companion codebook (<code>data/codebook.txt</code>) describes each variable.</p>
+
+  <h2 class="text-xl font-semibold mt-6">3. Data Cleaning & Exploratory Analysis</h2>
+  <ol class="list-decimal list-inside space-y-1">
+    <li><strong>Outlier Removal:</strong> Excluded properties with sale prices below $499 to eliminate data entry errors and symbolic transactions.</li>
+    <li><strong>Missing Values:</strong> Removed or imputed missing entries for critical predictors (e.g., square footage).</li>
+    <li><strong>Univariate Distributions:</strong> Sale Year/Month: Sales span multiple years, with peak activity in summer months; Sale Price: Right-skewed; log transformation employed.</li>
+    <li><strong>Correlation Analysis:</strong> Building square footage and assessor estimates exhibit strong positive correlations (r &gt; 0.75) with sale price.</li>
+    <li><strong>Feature Relationships:</strong> Residual plots from early models revealed heteroscedasticity and nonlinear patterns, motivating log transforms and expanded predictors.</li>
+  </ol>
+  <div class="space-y-4 my-4">
+    <img src="../assets/images/cook-county-figure1.png" alt="Distribution of Log Sale Price" class="w-full rounded shadow">
+    <img src="../assets/images/cook-county-figure2.png" alt="Log Sale Price by Number of Bedrooms" class="w-full rounded shadow">
   </div>
 
-  <h2 class="text-xl font-semibold mt-6">3. Modeling and Fairness Analysis</h2>
-  <p>Though predictive models achieved strong accuracy (low RMSE), I found that residuals were not evenly distributed. Lower-priced homes were systematically overestimated, which leads to disproportionate tax burdens for low-income residents. These findings align with long-standing critiques of Cook County’s assessment system.</p>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-  <img src="../assets/images/cook-county-figure4.png" alt="RMSE by Price Interval" class="rounded shadow">
-  <img src="../assets/images/cook-county-figure5.png" alt="Overestimation Rates by Price" class="rounded shadow">
-</div>
-<div class="my-4">
-  <img src="../assets/images/cook-county-figure3.png" alt="Residuals vs. Log Sale Price" class="rounded shadow">
-</div>
+  <h2 class="text-xl font-semibold mt-6">4. Modeling Framework</h2>
+  <ol class="list-decimal list-inside space-y-1">
+    <li><strong>Baseline Model (Model 1):</strong> Features: Total bedroom count; Pipeline: outlier removal, log-transform price; Estimator: OLS; Purpose: benchmark.</li>
+    <li><strong>Intermediate Model (Model 2):</strong> Features: Bedrooms + log(building sq ft); Pipeline: same as Baseline; Evaluation: residual analysis.</li>
+    <li><strong>Final Model (Model 3):</strong> Features (13 total): log-transformed sale price, building/land sq ft, assessor estimates, engineered fireplaces, repair condition, binary central air, one-hot room counts; Estimator: LinearRegression; Evaluation: RMSE.</li>
+  </ol>
 
-  <h2 class="text-xl font-semibold mt-6">4. Equity and Context</h2>
-  <p>Even accurate models can reinforce systemic inequity if their errors fall disproportionately on disadvantaged groups. Drawing from local journalism and policy investigations, I discuss how tax appeal processes, neighborhood demographics, and historical segregation intersect with model performance to compound unfair outcomes.</p>
+  <h2 class="text-xl font-semibold mt-6">5. Results & Evaluation</h2>
+  <table class="w-full text-left border-collapse my-4">
+    <thead>
+      <tr>
+        <th class="border-b px-2 py-1">Model</th>
+        <th class="border-b px-2 py-1">Engineered Feature(s)</th>
+        <th class="border-b px-2 py-1">RMSE (multiplier error)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border-b px-2 py-1">Model 1 (Baseline)</td>
+        <td class="border-b px-2 py-1">Bedrooms</td>
+        <td class="border-b px-2 py-1">0.8674 (~×2.38 error)</td>
+      </tr>
+      <tr>
+        <td class="border-b px-2 py-1">Model 2 (Intermediate)</td>
+        <td class="border-b px-2 py-1">Bedrooms + Log Area</td>
+        <td class="border-b px-2 py-1">0.8059 (~×2.24 error)</td>
+      </tr>
+      <tr>
+        <td class="border-b px-2 py-1">Model 3 (Final)</td>
+        <td class="border-b px-2 py-1">13 Predictors</td>
+        <td class="border-b px-2 py-1">0.3716 (~×1.45 error)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="space-y-4 my-4">
+    <img src="../assets/images/cook-county-figure3.png" alt="Overestimation Rate by Price Strata" class="w-full rounded shadow">
+    <img src="../assets/images/cook-county-figure4.png" alt="Residuals vs. True Log Sale Price" class="w-full rounded shadow">
+    <img src="../assets/images/cook-county-figure5.png" alt="RMSE by Price Strata" class="w-full rounded shadow">
+  </div>
 
-  <h2 class="text-xl font-semibold mt-6">5. Conclusion</h2>
-  <p>Predictive models must go beyond technical accuracy to incorporate fairness, transparency, and local context. Without thoughtful oversight, even the most statistically sound models risk amplifying racial and economic disparities. </p>
+  <h2 class="text-xl font-semibold mt-6">6. Discussion & Next Steps</h2>
+  <ol class="list-decimal list-inside space-y-1">
+    <li><strong>Interpretability & Equity:</strong> Model coefficients remain interpretable; regressive bias leads to higher tax burdens on low-income owners, echoing Chicago Tribune investigations.</li>
+    <li><strong>Systemic Context:</strong> Higher-value homeowners more likely to appeal assessments; historical segregation correlates with housing underinvestment; policy implications include fairness-aware modeling and appeal assistance.</li>
+    <li><strong>Residual Analysis by Price Strata:</strong> Lowest quintile homes are systematically overestimated, indicating regressive taxation biases.</li>
+    <li><strong>Next Steps:</strong> Incorporate spatial/hierarchical models; experiment with fairness-aware and ensemble methods; build stakeholder dashboards.</li>
+  </ol>
+
+  <h2 class="text-xl font-semibold mt-6">7. Conclusion</h2>
+  <p>This analysis demonstrates that a reproducible hedonic modeling workflow cuts RMSE from 0.87 to 0.37 and uncovers a regressive taxation bias in Cook County, Illinois. There exists a systematic overestimation of lower-priced homes, intensifying price burdens for their owners.</p>
+  <p class="mt-4">Even accurate models can reinforce systemic inequity if their errors fall disproportionately on disadvantaged groups. Predictive models must go beyond technical accuracy to incorporate fairness, transparency, and local context. Without thoughtful oversight, even the most statistically sound models risk amplifying racial and economic disparities. Future work should integrate fairness metrics and spatial controls to ensure more equitable assessment outcomes.</p>
+
+  <h2 class="text-xl font-semibold mt-6">References</h2>
+  <ol class="list-decimal list-inside space-y-1">
+    <li>Cook County Assessor’s Office. <em>Cook County Property Codebook.</em> 2025.</li>
+    <li>Chicago Tribune investigations on property assessment disparities.</li>
+    <li>Hastie, T., Tibshirani, R., & Friedman, J. (2009). <em>The Elements of Statistical Learning.</em> Springer.</li>
+    <li>Kuhn, M., & Johnson, K. (2019). <em>Feature Engineering and Selection.</em> CRC Press.</li>
+  </ol>
 
   <footer class="text-center text-sm text-gray-500 mt-12">
     <p>&copy; 2025 Jade Chen</p>
@@ -61,7 +118,6 @@
       body.classList.add('bg-neutral-900', 'text-gray-300');
       footer.classList.remove('bg-stone-200');
       footer.classList.add('bg-neutral-800');
-
       localStorage.setItem('theme', 'dark');
     }
 
@@ -70,7 +126,6 @@
       body.classList.remove('bg-neutral-900', 'text-gray-300');
       footer.classList.add('bg-stone-200');
       footer.classList.remove('bg-neutral-800');
-
       localStorage.setItem('theme', 'light');
     }
 
