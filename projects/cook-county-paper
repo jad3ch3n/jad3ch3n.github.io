@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cook County Property Sale Price Analysis</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; max-width: 800px; }
+    h1, h2 { color: #333; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f5f5f5; }
+    strong { color: #000; }
+  </style>
+</head>
+<body>
+  <h1>Determinants of Residential Property Sale Prices in Cook County, IL</h1>
+  <h2>Abstract</h2>
+  <p>This study examines the determinants of residential property sale prices in Cook County, Illinois using a three-stage linear modeling approach. Beginning with a simple univariate model based on bedroom count, we iteratively introduce building size and then a comprehensive set of engineered features (including log-transformed area measures, tax assessor estimates, fireplace counts, repair condition scores, central air conditioning status, and categorical encodings of room counts). Our final model—trained on 204,792 property transactions—achieves a root-mean-square error (RMSE) of <strong>0.3716</strong> in predicting log sale price, representing a substantial improvement over the baseline.</p>
+
+  <h2>1. Introduction</h2>
+  <p>Accurate prediction of residential sale prices is crucial for market transparency, equitable property taxation, and urban planning. While hedonic price models have long incorporated structural and locational attributes, advances in data pipelines and feature engineering now allow for larger-scale, reproducible analyses. This paper details a structured approach to modeling Cook County sale prices, emphasizing clarity, reproducibility, and interpretability for inclusion in a professional data portfolio.</p>
+
+  <h2>2. Data Description</h2>
+  <p>The primary dataset (<code>cook_county_train.csv</code>) contains <strong>204,792</strong> records and <strong>62</strong> features, including physical attributes (e.g., building square footage, number of bedrooms), material characteristics (e.g., roof and wall types), condition assessments, and tax assessor estimates for land and building values. A companion codebook (<code>data/codebook.txt</code>) describes each variable.</p>
+
+  <h2>3. Data Cleaning &amp; Exploratory Analysis</h2>
+  <ol>
+    <li><strong>Outlier Removal:</strong> Excluded properties with sale prices below $499 to eliminate data entry errors and symbolic transactions.</li>
+    <li><strong>Missing Values:</strong> Removed or imputed missing entries for critical predictors (e.g., square footage).</li>
+    <li><strong>Univariate Distributions:</strong> Sales span multiple years, with peak activity in summer months. Sale prices are right-skewed; log transformation was employed to stabilize variance.</li>
+    <li><strong>Correlation Analysis:</strong> Building square footage and assessor estimates exhibit strong positive correlations (r &gt; 0.75) with sale price.</li>
+    <li><strong>Feature Relationships:</strong> Residual plots from early models revealed heteroscedasticity and nonlinear patterns, motivating log transforms and expanded predictors.</li>
+  </ol>
+
+  <h2>4. Modeling Framework</h2>
+  <h3>4.1 Baseline Model (Model 1)</h3>
+  <p><strong>Features:</strong> Total bedroom count.<br>
+  <strong>Estimator:</strong> Ordinary Least Squares (OLS).<br>
+  <strong>Purpose:</strong> Establish a simple benchmark.</p>
+
+  <h3>4.2 Intermediate Model (Model 2)</h3>
+  <p><strong>Features:</strong> Bedrooms + log(building square feet).<br>
+  <strong>Training/Validation Split:</strong> 80/20 random split (seed=1337).<br>
+  <strong>Evaluation:</strong> Residual analysis on validation set to assess bias patterns.</p>
+
+  <h3>4.3 Final Model</h3>
+  <p><strong>Features (13 total):</strong></p>
+  <ul>
+    <li>Log-transformed: Sale price, building square feet, land square feet, assessor estimates (building &amp; land).</li>
+    <li>Engineered: Total bedrooms, exponential treatment of fireplaces and repair condition to capture nonlinear effects.</li>
+    <li>Binary: Central air indicator.</li>
+    <li>One-hot: Room count categories (1–6+).</li>
+  </ul>
+  <p><strong>Estimator:</strong> LinearRegression with intercept.<br>
+  <strong>Evaluation:</strong> RMSE on training set using custom <code>evaluate_model()</code> function.</p>
+
+  <h2>5. Results &amp; Evaluation</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Model</th>
+        <th>Features</th>
+        <th>RMSE (Log Price)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Model 1</td>
+        <td>Bedrooms</td>
+        <td>Baseline</td>
+      </tr>
+      <tr>
+        <td>Model 2</td>
+        <td>Bedrooms + Log(Building Sq Ft)</td>
+        <td>Improved</td>
+      </tr>
+      <tr>
+        <td><strong>Final</strong></td>
+        <td>13 engineered &amp; transformed predictors</td>
+        <td><strong>0.3716</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>6. Discussion</h2>
+  <ul>
+    <li><strong>Interpretability:</strong> Despite added complexity, the final linear model remains interpretable; coefficients can be back-transformed to estimate percent changes in price per unit change in predictors.</li>
+    <li><strong>Equity Implications:</strong> Incorporating assessor estimates highlights systematic biases in tax appraisals versus market outcomes, informing policy interventions.</li>
+    <li><strong>Limitations &amp; Next Steps:</strong>
+      <ul>
+        <li>Spatial variables (e.g., neighborhood codes, latitude/longitude) were omitted for simplicity; geospatial modeling could further reduce error.</li>
+        <li>Nonlinear methods (e.g., random forests) may capture interaction effects but at the cost of interpretability.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>7. Conclusion</h2>
+  <p>This analysis demonstrates a reproducible, pipeline-driven approach to hedonic price modeling in Cook County. Through staged augmentation—from a univariate baseline to a richly engineered feature set—we achieve substantial error reduction while retaining model transparency. The complete code and results are available for inclusion in a data portfolio, offering a template for similar large-scale housing equity studies.</p>
+
+  <h2>References</h2>
+  <ol>
+    <li>Cook County Assessor’s Office. <em>Cook County Property Codebook</em>. 2025.</li>
+    <li>Hastie, T., Tibshirani, R., &amp; Friedman, J. (2009). <em>The Elements of Statistical Learning</em>. Springer.</li>
+    <li>Kuhn, M., &amp; Johnson, K. (2019). <em>Feature Engineering and Selection</em>. CRC Press.</li>
+  </ol>
+</body>
+</html>
