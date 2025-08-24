@@ -1,29 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Resume | Jade Chen</title>
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Apply saved theme before page renders -->
+  <!-- Theme bootstrap: default light unless user previously chose dark -->
   <script>
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const isDark = saved === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      if (!saved) localStorage.setItem('theme', 'light');
+    })();
   </script>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-neutral-900 dark:text-gray-300 font-sans transition-colors duration-300">
   <div class="max-w-4xl mx-auto p-6">
-    <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+    <!-- Top bar to host the toggle -->
+    <div class="flex items-center justify-between">
+      <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+      <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">💡</button>
+    </div>
+
     <h1 class="text-3xl font-bold mt-4 mb-4">Resume</h1>
-      <iframe
+
+    <iframe
       src="https://drive.google.com/file/d/1OwJQ3PQxUItzq56BjKpyCFPFlWDLJUbx/preview"
-        class="w-full h-[90vh] border rounded shadow"
+      class="w-full h-[90vh] border rounded shadow bg-white dark:bg-neutral-800"
       frameborder="0"
       allow="autoplay">
     </iframe>
+
+    <footer class="text-center text-sm text-gray-500 dark:text-gray-400 mt-12 border-t border-gray-200 dark:border-neutral-800 pt-4">
+      <p>&copy; 2025 Jade Chen</p>
+    </footer>
   </div>
+
+  <!-- Toggle logic: flip html.dark and persist -->
+  <script>
+    (function () {
+      const btn = document.getElementById('theme-toggle');
+      const isDark = document.documentElement.classList.contains('dark');
+      btn.setAttribute('aria-pressed', String(isDark));
+
+      btn.addEventListener('click', () => {
+        const nextIsDark = !document.documentElement.classList.contains('dark');
+        document.documentElement.classList.toggle('dark', nextIsDark);
+        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
+        btn.setAttribute('aria-pressed', String(nextIsDark));
+      });
+    })();
+  </script>
 </body>
 </html>
