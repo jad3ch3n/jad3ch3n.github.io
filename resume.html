@@ -4,24 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Resume | Jade Chen</title>
-  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Theme bootstrap: default light unless user previously chose dark -->
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Ensure Tailwind uses class strategy for dark mode
+    tailwind.config = { darkMode: 'class' };
+  </script>
+
+  <!-- Theme bootstrap: default LIGHT unless user explicitly chose dark -->
   <script>
     (function () {
-      const saved = localStorage.getItem('theme');
+      const saved = localStorage.getItem('theme');   // "dark" | "light" | null
       const isDark = saved === 'dark';
       document.documentElement.classList.toggle('dark', isDark);
-      if (!saved) localStorage.setItem('theme', 'light');
+      if (!saved) localStorage.setItem('theme','light'); // initialize once
     })();
   </script>
 </head>
+
 <body class="bg-gray-50 text-gray-800 dark:bg-neutral-900 dark:text-gray-300 font-sans transition-colors duration-300">
   <div class="max-w-4xl mx-auto p-6">
-    <!-- Top bar to host the toggle -->
+    <!-- Top bar -->
     <div class="flex items-center justify-between">
       <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
-      <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">💡</button>
+      <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode" aria-pressed="false">💡</button>
     </div>
 
     <h1 class="text-3xl font-bold mt-4 mb-4">Resume</h1>
@@ -38,18 +45,27 @@
     </footer>
   </div>
 
-  <!-- Toggle logic: flip html.dark and persist -->
+  <!-- Toggle logic: flip html.dark + persist (same as index.html) -->
   <script>
     (function () {
       const btn = document.getElementById('theme-toggle');
-      const isDark = document.documentElement.classList.contains('dark');
-      btn.setAttribute('aria-pressed', String(isDark));
+      if (!btn) return;
 
+      function applyTheme(mode) {
+        const isDark = mode === 'dark';
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('theme', mode);
+        btn.setAttribute('aria-pressed', String(isDark));
+      }
+
+      // Initialize from storage (keeps aria-pressed in sync)
+      const saved = localStorage.getItem('theme'); // "dark" | "light"
+      applyTheme(saved === 'dark' ? 'dark' : 'light');
+
+      // Toggle on click
       btn.addEventListener('click', () => {
-        const nextIsDark = !document.documentElement.classList.contains('dark');
-        document.documentElement.classList.toggle('dark', nextIsDark);
-        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
-        btn.setAttribute('aria-pressed', String(nextIsDark));
+        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+        applyTheme(next);
       });
     })();
   </script>
